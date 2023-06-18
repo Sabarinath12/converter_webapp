@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <label for="file" id="dragArea">DROP VIDEO HERE</label>
+    <div class="convert-info">
+      <p class="file-size-info">Max size: 100MB</p>
+      <button class="glow-button" id="convertButton">Convert</button>
+    </div>
+    <input type="file" id="file" accept="video/*" />
+    <div id="loadingBox">
+      <div class="loader"></div>
+      <p id="uploadStatus">Uploading...</p>
+    </div>
+    <p id="downloadStatus"></p>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    var fileInput = document.getElementById('file');
+    var dragArea = document.getElementById('dragArea');
+    var uploadStatus = document.getElementById('uploadStatus');
+
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length > 0) {
+        dragArea.textContent = 'File selected: ' + fileInput.files[0].name;
+      } else {
+        dragArea.textContent = 'DROP VIDEO HERE';
+      }
+    });
+
+    var convertButton = document.getElementById('convertButton');
+    var loadingBox = document.getElementById('loadingBox');
+    var downloadStatus = document.getElementById('downloadStatus');
+
+    convertButton.addEventListener('click', convertAndDownload);
+
+    function convertAndDownload() {
+      var file = fileInput.files[0];
+      if (!file) {
+        alert('Please select a video file.');
+        return;
+      }
+
+      var fileSize = file.size; // Get the size of the selected file in bytes
+      if (fileSize > 100 * 1024 * 1024) {
+        alert('File size exceeds the maximum limit of 100MB.');
+        return;
+      }
+
+      convertButton.disabled = true;
+      loadingBox.style.display = 'flex';
+      uploadStatus.style.display = 'block';
+
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        var videoData = event.target.result;
+        var videoBlob = new Blob([videoData], { type: file.type });
+
+        var formData = new FormData();
+        formData.append('video', videoBlob, file.name);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/convert', true);
+        xhr.responseType = 'blob';
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              var blob = xhr.response;
+
+              // Create a temporary link element to trigger the download
+              var link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = file.name.replace(/\.[^/.]+$/, '') + '.wav';
+              link.style.display = 'none';
+
+              // Append the link to the document body and click it programmatically
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+
+              // Show the download status message
+              downloadStatus.style.display = 'block';
+
+              // Hide the download status message after 5 seconds
+              setTimeout(function() {
+                downloadStatus.style.display = 'none';
+              }, 5000);
+            } else {
+              alert('Error: Failed to convert video.');
+            }
+            convertButton.disabled = false;
+            loadingBox.style.display = 'none';
+            uploadStatus.style.display = 'none';
+          }
+        };
+        xhr.send(formData);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  </script>
+</body>
+</html>
