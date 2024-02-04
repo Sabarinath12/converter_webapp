@@ -4,8 +4,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #ebf1f5; /* Material Design primary color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Material Design shadow */
+  background-color: #ebf1f5; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
 }
 
 .container {
@@ -33,7 +33,7 @@ body {
   overflow: hidden;
   transition: box-shadow 0.3s ease-in-out;
   margin-top: 20px;
-  margin-left: 5px; /* Adjust the value as needed */
+  margin-left: 5px; 
 }
 
 .glow-button::before {
@@ -126,9 +126,9 @@ label:hover {
   flex-direction: column;
   margin-top: 10px;
 }
-/* CSS styles remain the same as provided in your previous message */
 
-/* Add the following CSS code for the download status message */
+
+
 #downloadStatus {
   text-align: center;
   font-size: 18px;
