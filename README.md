@@ -15,8 +15,5 @@ Download Your Audio: Once the conversion is complete, the app will automatically
 Things to Note:
 The app currently limits uploads to 100MB to keep things running smoothly and avoid processing excessively large files. However, you can adjust this limit based on your needs or server capabilities.
 
-Dependencies
-#Flask
-#FFmpeg
-#Python
+Dependencies:Flask,FFmpeg,Python
 
