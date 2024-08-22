@@ -1,19 +1,20 @@
-This project is a simple web app that lets you convert video file into audio file. 
-It’s built with Flask, a web framework that takes care of handling the file uploads and running the conversion, 
-and uses FFmpeg to turn your videos into .wav audio file.
-
-What It Does:
-#Flask App (main.py): This is the brain of the operation. 
-It handles everything behind the scenes—when you upload a video, it saves the file, converts it to audio using FFmpeg, and then lets you download the audio file.
-#Front-End: The user interface (created with HTML, CSS, and JavaScript) is where you interact with the app. 
-You can drag and drop your video file or select them manually, click the button to start the conversion, and watch a loading animation while it processes.
-
-How It Works:
-#Upload Your Video: You can either drag your video file onto the webpage or select it using the file picker.
-#Start the Conversion: Hit the "Convert" button, and the app will handle the rest. 
-It uploads the video to the server, converts it to an audio file, and gets it ready for download.
-#Download Your Audio: Once the conversion is complete, the app will automatically download the audio file to your device
-
-Limitations added:
-The app currently limits uploads to 100MB to keep things running smoothly and avoid processing excessively large files. 
-However, you can adjust this limit based on your needs or server capabilities.
+Video to Audio Converter Web App
+Overview
+This project is a simple web application that enables users to convert video files into audio files. Built with Flask, a robust web framework, and FFmpeg, a powerful audio processing tool, this app streamlines the conversion process.
+Key Components
+Flask App (main.py)
+The core of the application, handling file uploads, conversion, and download processes.
+Front-End
+User-friendly interface built with HTML, CSS, and JavaScript, allowing users to:
+Drag and drop or manually select video files
+Initiate conversion with a button click
+View a loading animation during processing
+How It Works
+Upload Your Video: Drag and drop or select your video file using the file picker.
+Start the Conversion: Click the "Convert" button, and the app will:
+Upload the video to the server
+Convert it to an audio file using FFmpeg
+Prepare the file for download
+Download Your Audio: Once conversion is complete, the app will automatically download the audio file to your device.
+Limitations
+File Size Limit: Currently set to 100MB to ensure smooth processing and prevent excessive resource usage. Adjust this limit according to your needs or server capabilities.
