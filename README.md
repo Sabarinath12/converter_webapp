@@ -1,7 +1,7 @@
 This project is a simple web app that lets you convert video files into audio files. It’s built with Flask, a web framework that takes care of handling the file uploads and running the conversion, and uses FFmpeg to turn your videos into .wav audio files.
 
 What It Does:
-Flask App (main.py): This is the brains of the operation. It handles everything behind the scenes—when you upload a video, it saves the file, converts it to audio using FFmpeg, and then lets you download the audio file.
+Flask App (main.py): It handles everything behind the scenes—when you upload a video, it saves the file, converts it to audio using FFmpeg, and then lets you download the audio file.
 
 Front-End: The user interface (created with HTML, CSS, and JavaScript) is where you interact with the app. You can drag and drop your video files or select them manually, click a button to start the conversion, and watch a loading animation while it processes.
 
