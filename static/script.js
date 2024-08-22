@@ -13,7 +13,7 @@ function convertAndDownload() {
     return;
   }
 
-  var fileSize = file.size; // Get the size of the selected file in bytes
+  var fileSize = file.size;
   if (fileSize > 100 * 1024 * 1024) {
     alert('File size exceeds the maximum limit of 100MB.');
     return;
@@ -38,18 +38,15 @@ function convertAndDownload() {
         if (xhr.status === 200) {
           var blob = xhr.response;
 
-          // Create a temporary link element to trigger the download
           var link = document.createElement('a');
           link.href = window.URL.createObjectURL(blob);
           link.download = file.name.replace(/\.[^/.]+$/, '') + '.wav';
           link.style.display = 'none';
 
-          // Append the link to the document body and click it programmatically
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
 
-          // Show the download status message
           showStatusMessage('Thank you for downloading!', false);
         } else {
           showStatusMessage('Failed to convert video.', true);
